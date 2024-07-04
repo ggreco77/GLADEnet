@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  margin: 1rem;
+  text-align: center;
+}
+
+.site-title {
+  font-size: 2rem;
+}
+
+.footer {
+  margin-top: 1rem;
+  padding: 1rem;
+  position: flexed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.css-13cymwt-control {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: default;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  max-width: 300px;
+  outline: 0 !important;
+  position: relative;
+  -webkit-transition: all 100ms;
+  transition: all 100ms;
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  width: revert;
+}
+
+.button {
+  background-color: #22787b;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 5px 8px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 0px #327535;
+}
+
+.button:hover {
+  background-color: white;
+  color: #27272c;
+}
+
+.button:active {
+  transition: 0.3s;
+  background-color: #bc5925;
+  color: #fff;
+}
+
+.button:focus {
+  background-color: #bc5925;
+  color: #fff;
+}
+
+.textboxid {
+  height: 25px;
+  font-size: 14pt;
+  width: 100px;
+  padding: 5px 5px 5px 5px;
+}
+
+.button-refresh {
+  background-color: #4c89af;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 2px 1px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 0px #2176ab;
+}
+
+.button-refresh:hover {
+  background-color: white;
+  color: #27272c;
+}
+
+.button-refresh:focus {
+  background-color: #bc5925;
+  color: #fff;
+}
+a:link {
+  color: rgb(240, 121, 141);
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #c0c0c0;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}

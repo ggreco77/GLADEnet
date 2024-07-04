@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Gladenet",
+  "name": "Gladenet: catalog service",
   "icons": [
     {
       "src": "favicon.ico",

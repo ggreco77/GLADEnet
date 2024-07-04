@@ -24,7 +24,37 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+
+    <!--
+    AladinLite: recommendation for users smartphone/tablets users -->
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no"
+    />
+    
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      charset="utf-8"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js"
+      charset="utf-8"
+    ></script>
+
+    <!-- MOCWASM 
+    <script type="module">
+      import init, * as moc from './pkg/moc.js';
+      async function run() {
+          const wasm = await init().catch(console.error);
+    window.moc = moc;
+      }
+      run();
+  </script>
+-->
+    <title>GLADEnet</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
