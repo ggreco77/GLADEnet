@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import useDimensions from "react-cool-dimensions";
 import Select from "react-select";
 import InfoFilters from "./InfoFilters";
-import InfoQuery from "./InfoQuery";
+{/* import InfoQuery from "./InfoQuery"; */}
 
 // Funzione per formattare il valore dpdv
 function formatDpdvValue(value) {
@@ -221,7 +221,7 @@ const AladinHips = (props) => {
         </div>
       </div>
 
-      <InfoQuery />
+      {/* <InfoQuery /> */}
     </>
   );
 };
