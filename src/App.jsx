@@ -24,7 +24,7 @@ function App() {
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch(dataUrl);
+      const response = await fetch(dataUrl, { cache: "no-cache" });
       const newData = await response.json();
 
       // Verifica se il JSON è stato aggiornato confrontando la data di modifica
