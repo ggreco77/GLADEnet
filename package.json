@@ -1,6 +1,6 @@
 {
   "name": "glade-net",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "homepage": "https://virgo.pg.infn.it/gladenet/catalogs",
   "dependencies": {
