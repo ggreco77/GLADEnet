@@ -12,10 +12,49 @@ import RefreshContent from "./RefreshContent";
 import GladenetApp from "./GladenetApp";
 
 // Dichiarazione di appVersion
-const appVersion = '0.3.3';
+const appVersion = "0.3.4";
 
-const dataUrl = "https://virgo.pg.infn.it/gladenet/catalogs/data/json/gladenet.json";
+const workerBase = "https://gwsky-web-app.giuseppe-greco.workers.dev/";
 
+function proxify(url) {
+  if (!url || typeof url !== "string") return url;
+
+  if (
+    url.startsWith("https://virgo.pg.infn.it") ||
+    url.startsWith("https://gracedb.ligo.org")
+  ) {
+    return `${workerBase}?url=${encodeURIComponent(url)}`;
+  }
+
+  return url;
+}
+
+function proxifyAnalysis(item) {
+  return {
+    ...item,
+    hips_prob: proxify(item.hips_prob),
+    hips_bmag: proxify(item.hips_bmag),
+    comple: proxify(item.comple),
+    skymap: proxify(item.skymap),
+    vots: proxify(item.vots),
+    mocarea: proxify(item.mocarea),
+    mocext: proxify(item.mocext),
+    provenance: item.provenance,
+  };
+}
+
+function proxifyEvent(item) {
+  return {
+    ...item,
+    analyses: Array.isArray(item.analyses)
+      ? item.analyses.map(proxifyAnalysis)
+      : [],
+  };
+}
+
+const dataUrl = proxify(
+  "https://virgo.pg.infn.it/gladenet/catalogs/data/json/gladenet.json",
+);
 
 function App() {
   // Loading data
@@ -26,7 +65,9 @@ function App() {
     try {
       const response = await fetch(dataUrl, { cache: "no-cache" });
       const newData = await response.json();
-
+      const proxiedData = Array.isArray(newData)
+        ? newData.map(proxifyEvent)
+        : [];
       // Verifica se il JSON è stato aggiornato confrontando la data di modifica
       const lastModified = response.headers.get("last-modified");
       const storedLastModified = localStorage.getItem("lastModified");
@@ -36,7 +77,7 @@ function App() {
         localStorage.setItem("lastModified", lastModified);
       }
 
-      setJsonData(newData);
+      setJsonData(proxiedData);
     } catch (error) {
       console.error("Error fetching JSON:", error);
     }
@@ -113,7 +154,6 @@ function App() {
     if (event && analysis) {
       setHips_prob(`${analysis.hips_prob}`);
       setHips_bmag(`${analysis.hips_bmag}`);
-      setComple(`${analysis.comple}`);
       setCandidates(`${analysis.candidates}`);
       setProvenance(`${analysis.provenance}`);
       setIntersection(`${analysis.intersection}`);
@@ -147,7 +187,7 @@ function App() {
           step_bar_bmag={analysis.stepbar_bmag}
           moc_area={analysis.mocarea}
           moc_ext={analysis.mocext}
-        />
+        />,
       );
 
       setComple(<ComplePlot comple_plot={analysis.comple} />);
@@ -171,7 +211,7 @@ function App() {
 
   useEffect(() => {
     // Recupera la versione memorizzata localmente
-    const localVersion = localStorage.getItem('appVersion');
+    const localVersion = localStorage.getItem("appVersion");
 
     // Controlla se la versione memorizzata localmente è diversa dalla versione corrente
     if (localVersion !== appVersion) {
@@ -181,7 +221,7 @@ function App() {
 
   const handleRefresh = () => {
     // Aggiorna la versione memorizzata localmente
-    localStorage.setItem('appVersion', appVersion);
+    localStorage.setItem("appVersion", appVersion);
 
     // Ricarica la pagina per applicare le modifiche
     window.location.reload(true);
@@ -189,21 +229,37 @@ function App() {
 
   return (
     <>
- {isDataUpdated && (
-  <div style={{ backgroundColor: 'yellow', padding: '10px', textAlign: 'center' }}>
-    Data has been updated. &nbsp;
-    {/* Last modified: {new Date(localStorage.getItem("lastModified")).toUTCString()}.*/}
-    To view the latest changes, please refresh the page.&nbsp;&nbsp;
-    <button onClick={() => window.location.reload(true)}> Refresh </button>
-  </div>
-)}
+      {isDataUpdated && (
+        <div
+          style={{
+            backgroundColor: "yellow",
+            padding: "10px",
+            textAlign: "center",
+          }}
+        >
+          Data has been updated. &nbsp;
+          {/* Last modified: {new Date(localStorage.getItem("lastModified")).toUTCString()}.*/}
+          To view the latest changes, please refresh the page.&nbsp;&nbsp;
+          <button onClick={() => window.location.reload(true)}>
+            {" "}
+            Refresh{" "}
+          </button>
+        </div>
+      )}
 
-{isNewVersionAvailable && (
-  <div style={{ backgroundColor: 'yellow', padding: '10px', textAlign: 'center' }}>
-    A new version of the app is available. To apply the changes, please refresh the page.&nbsp;&nbsp;
-    <button onClick={handleRefresh}> Refresh </button>
-  </div>
-)}
+      {isNewVersionAvailable && (
+        <div
+          style={{
+            backgroundColor: "yellow",
+            padding: "10px",
+            textAlign: "center",
+          }}
+        >
+          A new version of the app is available. To apply the changes, please
+          refresh the page.&nbsp;&nbsp;
+          <button onClick={handleRefresh}> Refresh </button>
+        </div>
+      )}
 
       <CookieConsent
         location="top"
@@ -214,7 +270,9 @@ function App() {
         expires={350}
         visible="byCookieValue"
       >
-        This website uses strictly necessary cookies allow core website functionality. By using our site you consent to the placement of this type of cookie on your device. <br></br>{" "}
+        This website uses strictly necessary cookies allow core website
+        functionality. By using our site you consent to the placement of this
+        type of cookie on your device. <br></br>{" "}
         <span style={{ fontSize: "12px" }}>
           <a href="https://home.infn.it/en/privacy">View our Privacy Policy</a>
         </span>

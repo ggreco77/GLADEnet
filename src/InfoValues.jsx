@@ -34,10 +34,7 @@ const InfoValues = (props) => {
             border: "1px solid white",
             padding: "10px",
             fontSize: "14px", // default font size
-            '@media screen and (max-width: 768px)': {
-              width: "100%", // full width for smaller screens
-              fontSize: "12px" // smaller font size for smaller screens
-            }
+            
           }}
         >
           <thead>
