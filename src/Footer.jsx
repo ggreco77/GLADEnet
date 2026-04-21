@@ -18,11 +18,7 @@ const Footer = () => (
       be used with caution <FaExclamationTriangle />
     </p>
     <p>
-<<<<<<< HEAD
-      GLADEnet v0.3.3. Last updated on July, 2024 <FaCalendarAlt />
-=======
       GLADEnet v0.3.5. Last updated on March, 2026 <FaCalendarAlt />
->>>>>>> Update app for GitHub Pages deployment
       {}{" "}
     </p>
     <p>
